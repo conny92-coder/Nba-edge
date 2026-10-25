@@ -94,7 +94,9 @@ with tabs[4]:
         a.metric("Home win %",f"{np.mean(margins>0):.1%}")
         b.metric("Mean home margin",f"{np.mean(margins):+.1f}")
         c.metric("Mean total",f"{np.mean(totals):.1f}")
-        st.bar_chart(pd.DataFrame({"Home margin":margins}).value_counts(bins=30).sort_index())
+        hist_counts, hist_edges = np.histogram(margins, bins=30)
+        hist_df = pd.DataFrame({"Home margin bin": [f"{hist_edges[i]:.1f} to {hist_edges[i+1]:.1f}" for i in range(len(hist_counts))], "Simulations": hist_counts}).set_index("Home margin bin")
+        st.bar_chart(hist_df)
         st.caption("Normal-model simulation using assumed uncertainty; not independently validated.")
 with tabs[5]:
     st.subheader("Bet tracker")
