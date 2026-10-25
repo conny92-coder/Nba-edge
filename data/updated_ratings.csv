@@ -1,8 +1,31 @@
 Code,Team,Baseline Net,Result Adjustment,Updated Net,Recorded Games
-ATL,Atlanta Hawks,5.55,1.25,6.8,1
+ATL,Atlanta Hawks,5.55,0.794,6.343,2
 BOS,Boston Celtics,5.10,0.0,5.1,0
-BKN,Brooklyn Nets,-6.96,0.331,-6.629,1
-CHA,Charlotte Hornets,-2.17,-1.25,-3.42,1
-CHI,Chicago Bulls,-6.50,0.0,-6.5,0
-CLE,Cleveland Cavaliers,1.66,-0.331,1.329,1
-DAL,Dallas Mavericks,-4.05,0.0,-4.05,0
+BKN,Brooklyn Nets,-6.96,0.322,-6.638,1
+CHA,Charlotte Hornets,-2.17,-0.928,-3.098,2
+CHI,Chicago Bulls,-6.50,0.241,-6.26,1
+CLE,Cleveland Cavaliers,1.66,-0.496,1.164,2
+DAL,Dallas Mavericks,-4.05,0.745,-3.305,1
+DEN,Denver Nuggets,2.73,-0.116,2.614,1
+DET,Detroit Pistons,8.37,0.561,8.931,1
+GSW,Golden State Warriors,-3.54,0.0,-3.54,0
+HOU,Houston Rockets,6.67,0.456,7.127,1
+IND,Indiana Pacers,-7.15,-0.745,-7.895,1
+LAC,LA Clippers,-0.16,-0.22,-0.38,1
+LAL,Los Angeles Lakers,1.45,0.22,1.669,1
+MEM,Memphis Grizzlies,-3.76,0.0,-3.76,0
+MIA,Miami Heat,0.59,-0.883,-0.293,2
+MIL,Milwaukee Bucks,-10.69,0.074,-10.616,2
+MIN,Minnesota Timberwolves,7.39,0.752,8.142,1
+NOP,New Orleans Pelicans,-4.16,0.0,-4.16,0
+NYK,New York Knicks,4.21,0.0,4.21,0
+OKC,Oklahoma City Thunder,10.41,0.116,10.526,1
+ORL,Orlando Magic,-1.57,-0.752,-2.322,1
+PHI,Philadelphia 76ers,4.19,-0.141,4.049,2
+PHX,Phoenix Suns,-0.99,0.0,-0.99,0
+POR,Portland Trail Blazers,3.85,-0.155,3.695,1
+SAC,Sacramento Kings,-9.25,0.155,-9.095,1
+SAS,San Antonio Spurs,6.10,0.0,6.1,0
+TOR,Toronto Raptors,5.11,0.0,5.11,0
+UTA,Utah Jazz,-8.67,0.0,-8.67,0
+WAS,Washington Wizards,-7.13,0.0,-7.13,0
