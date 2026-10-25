@@ -146,7 +146,11 @@ with tabs[4]:
             st.error("American prices must be <= -100 or >= +100.")
 with tabs[5]:
     st.subheader("Injuries and positional mismatches")
-    st.info("ESPN injury snapshot is collected automatically, but player-specific point penalties and positional rotations are not yet calibrated. Review the report below.")\n    from pathlib import Path\n    if Path("data/injuries.csv").exists():\n        injury_df=pd.read_csv("data/injuries.csv")\n        st.dataframe(injury_df,hide_index=True,use_container_width=True)
+    st.info("ESPN injury snapshot is collected automatically, but player-specific point penalties and positional rotations are not yet calibrated. Review the report below.")
+    from pathlib import Path
+    if Path("data/injuries.csv").exists():
+        injury_df=pd.read_csv("data/injuries.csv")
+        st.dataframe(injury_df,hide_index=True,use_container_width=True)
     st.dataframe(games[[c for c in ["Away","Home","Away projected","Home projected"] if c in games.columns]],hide_index=True,use_container_width=True)
     penalty_away=st.number_input("Away injury / matchup point adjustment",value=0.0,step=0.5)
     penalty_home=st.number_input("Home injury / matchup point adjustment",value=0.0,step=0.5)
