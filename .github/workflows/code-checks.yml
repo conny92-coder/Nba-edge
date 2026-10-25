@@ -1,0 +1,27 @@
+name: NBA Edge code checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile all Python files
+        run: python -m compileall -q app.py scripts
+      - name: Validate ratings completeness
+        run: |
+          python - <<'PY'
+          import csv
+          with open("data/power_ratings.csv", newline="") as f:
+              rows=list(csv.DictReader(f))
+          codes=[r["Code"] for r in rows]
+          assert len(codes)==30, f"Expected 30 teams, got {len(codes)}"
+          assert len(set(codes))==30, "Duplicate teams"
+          assert all(r["Team"] and r["Live Net"] for r in rows)
+          print("30 distinct teams validated")
+          PY
