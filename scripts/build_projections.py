@@ -5,8 +5,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 data = Path(__file__).resolve().parents[1] / "data"
-with (data / "updated_ratings.csv").open() as f:
-    ratings = {r["Code"]: float(r["Updated Net"]) for r in csv.DictReader(f)}
+with (data / "power_ratings.csv").open() as f:
+    ratings = {r["Code"]: float(r["Live Net"]) for r in csv.DictReader(f)}
+if (data / "updated_ratings.csv").exists():
+    with (data / "updated_ratings.csv").open() as f:
+        ratings.update({r["Code"]: float(r["Updated Net"]) for r in csv.DictReader(f)})
 day = datetime.now(timezone.utc).strftime("%Y%m%d")
 url = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=" + day
 req = urllib.request.Request(url, headers={"User-Agent": "NBAEdgeResearch/1.0"})
