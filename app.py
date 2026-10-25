@@ -5,10 +5,21 @@ from scipy.stats import norm
 
 st.set_page_config(page_title="NBA Edge", page_icon="🏀", layout="wide")
 st.title("🏀 NBA Edge | Walters-Inspired Model")
-st.caption("V1 deployment • Imported spreadsheet snapshots • No live odds or injury verification")
-@st.cache_data
+st.caption("Automated results and provisional rating-adjusted projections • No verified live odds")
+@st.cache_data(ttl=300)
 def load_data():
-    return pd.read_csv("data/power_ratings.csv"), pd.read_csv("data/projections.csv")
+    from pathlib import Path
+    base=pd.read_csv("data/power_ratings.csv")
+    schedule_path=Path("data/live_projections.csv")
+    games=pd.read_csv(schedule_path) if schedule_path.exists() else pd.DataFrame(columns=["UTC tipoff","Away","Home","Away projected","Home projected"])
+    if "UTC tipoff" not in games.columns:
+        games["UTC tipoff"]=pd.NaT
+    updated_path=Path("data/updated_ratings.csv")
+    if updated_path.exists():
+        updates=pd.read_csv(updated_path)
+        base=base.merge(updates[["Code","Updated Net","Recorded Games"]],on="Code",how="left")
+        base["Live Net"]=base["Updated Net"].fillna(base["Live Net"])
+    return base,games
 ratings, games = load_data()
 
 from datetime import datetime, timezone
@@ -42,9 +53,9 @@ tabs = st.tabs(["🏀 Today’s Matchups", "⭐ Best Bets", "Power Rankings", "M
 with tabs[0]:
     st.subheader("Today’s NBA Matchups")
     today = today_games()
-    st.caption(f"Date (UTC): {datetime.now(timezone.utc).date()} • Imported spreadsheet projections, not a live schedule")
+    st.caption(f"Date (UTC): {datetime.now(timezone.utc).date()} • Automated schedule/projections; verify freshness in Data Health")
     if today.empty:
-        st.info("No matchups for today in the imported snapshot. Refresh the projection data to populate this slate.")
+        st.info("No current-day games in the last refreshed schedule. Check the workflow status.")
     for _, g in today.iterrows():
         with st.container(border=True):
             a,mid,h=st.columns([2,1,2])
@@ -59,7 +70,7 @@ with tabs[0]:
                 if logo(g["Home"]): st.image(logo(g["Home"]),width=70)
                 st.markdown(f"**{g[\u0027Home\u0027]}**")
                 st.metric("Projected points",f"{float(g[\u0027Home projected\u0027]):.1f}")
-            st.caption("Market odds and injury verification not connected")
+            st.caption("Ratings updated from completed scores; injury reports shown separately, not yet priced into projections")
 with tabs[1]:
     st.subheader("Best Bets — verification required")
     st.caption("Matches the sheet’s ranked bet-board concept, but does not mistake point differences for true EV.")
@@ -135,7 +146,7 @@ with tabs[4]:
             st.error("American prices must be <= -100 or >= +100.")
 with tabs[5]:
     st.subheader("Injuries and positional mismatches")
-    st.info("No verified injury/rotation feed is connected. Apply manually researched point adjustments to projections; do not assume player availability.")
+    st.info("ESPN injury snapshot is collected automatically, but player-specific point penalties and positional rotations are not yet calibrated. Review the report below.")\n    from pathlib import Path\n    if Path("data/injuries.csv").exists():\n        injury_df=pd.read_csv("data/injuries.csv")\n        st.dataframe(injury_df,hide_index=True,use_container_width=True)
     st.dataframe(games[[c for c in ["Away","Home","Away projected","Home projected"] if c in games.columns]],hide_index=True,use_container_width=True)
     penalty_away=st.number_input("Away injury / matchup point adjustment",value=0.0,step=0.5)
     penalty_home=st.number_input("Home injury / matchup point adjustment",value=0.0,step=0.5)
@@ -198,7 +209,7 @@ with tabs[8]:
             st.error(str(exc))
 with tabs[9]:
     st.subheader("Data health and provenance")
-    st.write("Source: Google Sheets imported snapshots; separate automated results/rating outputs when available.")
+    st.write("Source: ESPN scoreboard schedule/results; ratings use provisional score-margin adjustments to imported baseline.")
     from pathlib import Path
     from datetime import datetime as dt
     import json
