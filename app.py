@@ -198,7 +198,29 @@ with tabs[8]:
             st.error(str(exc))
 with tabs[9]:
     st.subheader("Data health and provenance")
-    st.write("Source: Google Sheets imported snapshots.")
+    st.write("Source: Google Sheets imported snapshots; separate automated results/rating outputs when available.")
+    from pathlib import Path
+    from datetime import datetime as dt
+    import json
+    p=Path("data/refresh_status.json")
+    if p.exists():
+        try:
+            status=json.loads(p.read_text())
+            st.json(status)
+            if status.get("errors"): st.error("Latest results refresh reported errors.")
+        except Exception as exc: st.warning(f"Refresh status unreadable: {exc}")
+    else:
+        st.warning("Automated results refresh has not produced a status file yet.")
+    for label,path in [("Completed game history","data/game_results.csv"),("Updated team ratings","data/updated_ratings.csv"),("Injury reports","data/injuries.csv")]:
+        p=Path(path)
+        if p.exists():
+            try:
+                df=pd.read_csv(p)
+                st.markdown(f"**{label}** — {len(df)} records")
+                st.dataframe(df,hide_index=True,use_container_width=True)
+            except Exception as exc: st.warning(f"{label}: {exc}")
+        else:
+            st.caption(f"{label}: waiting for first successful refresh")
     st.write("Ratings rows:",len(ratings)," | Projection rows:",len(games))
     st.dataframe(pd.DataFrame([
         {"Feed":"Power ratings","Status":"Static CSV snapshot"},
