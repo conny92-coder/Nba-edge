@@ -61,15 +61,15 @@ with tabs[0]:
             a,mid,h=st.columns([2,1,2])
             with a:
                 if logo(g["Away"]): st.image(logo(g["Away"]),width=70)
-                st.markdown(f"**{g[\u0027Away\u0027]}**")
-                st.metric("Projected points",f"{float(g[\u0027Away projected\u0027]):.1f}")
+                st.markdown(f"**{g['Away']}**")
+                st.metric("Projected points",f"{float(g['Away projected']):.1f}")
             with mid:
                 st.markdown("### @")
-                st.caption(f"Total {float(g[\u0027Away projected\u0027])+float(g[\u0027Home projected\u0027]):.1f}")
+                st.caption(f"Total {float(g['Away projected'])+float(g['Home projected']):.1f}")
             with h:
                 if logo(g["Home"]): st.image(logo(g["Home"]),width=70)
-                st.markdown(f"**{g[\u0027Home\u0027]}**")
-                st.metric("Projected points",f"{float(g[\u0027Home projected\u0027]):.1f}")
+                st.markdown(f"**{g['Home']}**")
+                st.metric("Projected points",f"{float(g['Home projected']):.1f}")
             st.caption("Ratings updated from completed scores; injury reports shown separately, not yet priced into projections")
             from pathlib import Path
             injury_path=Path("data/injuries.csv")
@@ -101,7 +101,7 @@ with tabs[1]:
                     margin=float(g["Home projected"])-float(g["Away projected"])
                     total=float(g["Home projected"])+float(g["Away projected"])
                     spread=float(g["Home spread"]); line=float(g["Total"])
-                    for label,p,price,edge in [(f"{g[\u0027Home\u0027]} {spread:+g}",cdf((margin+spread)/margin_sd),int(g["Spread odds"]),margin+spread),(f"Over {line:g}",cdf((total-line)/total_sd),int(g["Over odds"]),total-line)]:
+                    for label,p,price,edge in [(f"{g['Home']} {spread:+g}",cdf((margin+spread)/margin_sd),int(g["Spread odds"]),margin+spread),(f"Over {line:g}",cdf((total-line)/total_sd),int(g["Over odds"]),total-line)]:
                         if price <= -100 or price >= 100:
                             picks.append({"Away":g["Away"],"Home":g["Home"],"Pick":label,"Book":g["Book"],"Odds":price,"Edge (pts)":round(edge,1),"EV %":round(100*ev(p,price),2),"Captured UTC":g["Captured UTC"]})
                 if picks:
