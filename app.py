@@ -71,6 +71,17 @@ with tabs[0]:
                 st.markdown(f"**{g[\u0027Home\u0027]}**")
                 st.metric("Projected points",f"{float(g[\u0027Home projected\u0027]):.1f}")
             st.caption("Ratings updated from completed scores; injury reports shown separately, not yet priced into projections")
+            from pathlib import Path
+            injury_path=Path("data/injuries.csv")
+            if injury_path.exists():
+                injuries=pd.read_csv(injury_path)
+                teams=ratings.set_index("Code")["Team"].to_dict()
+                for code in [g["Away"],g["Home"]]:
+                    name=teams.get(code,"")
+                    active=injuries[injuries["team"].astype(str).str.casefold()==name.casefold()] if "team" in injuries.columns else pd.DataFrame()
+                    if not active.empty:
+                        st.caption(f"{code} reported injuries ({len(active)}): " + ", ".join(active["player"].astype(str).head(4)))
+
 with tabs[1]:
     st.subheader("Best Bets — verification required")
     st.caption("Matches the sheet’s ranked bet-board concept, but does not mistake point differences for true EV.")
