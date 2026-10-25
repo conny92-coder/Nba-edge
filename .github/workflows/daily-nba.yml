@@ -4,6 +4,9 @@ on:
     - cron: '20 12 * * *'
     - cron: '20 18 * * *'
   workflow_dispatch:
+concurrency:
+  group: nba-data-refresh
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:

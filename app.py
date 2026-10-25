@@ -21,6 +21,7 @@ def load_data():
         base["Live Net"]=base["Updated Net"].fillna(base["Live Net"])
     return base,games
 ratings, games = load_data()
+st.caption("Baseline coverage: all 30 teams from the model sheet. Score-margin adjustments are provisional, not calibrated NBA efficiencies.")
 
 from datetime import datetime, timezone
 from math import erf, sqrt
@@ -118,7 +119,7 @@ with tabs[2]:
     st.download_button("Export ratings",ratings.to_csv(index=False),"nba_ratings.csv","text/csv")
 with tabs[3]:
     st.subheader("Game projections")
-    st.warning("Imported spreadsheet snapshot, not a verified live NBA schedule.")
+    st.caption("Latest saved ESPN schedule and provisional projections; check refresh status and timestamps in Data Health.")
     st.dataframe(games,use_container_width=True,hide_index=True)
     st.download_button("Export projections",games.to_csv(index=False),"nba_projections.csv","text/csv")
 with tabs[4]:
@@ -237,6 +238,16 @@ with tabs[9]:
         except Exception as exc: st.warning(f"Refresh status unreadable: {exc}")
     else:
         st.warning("Automated results refresh has not produced a status file yet.")
+    for feed in ["projections", "injuries"]:
+        status_path = Path(f"data/{feed}_status.json")
+        if status_path.exists():
+            try:
+                feed_state = json.loads(status_path.read_text())
+                st.write(f"{feed.title()} refresh", feed_state)
+                if feed_state.get("errors"):
+                    st.warning(f"{feed.title()} feed unavailable. Showing the last saved snapshot, which may be stale.")
+            except (OSError, ValueError) as exc:
+                st.warning(f"Unable to read {feed} refresh status: {exc}")
     for label,path in [("Completed game history","data/game_results.csv"),("Updated team ratings","data/updated_ratings.csv"),("Injury reports","data/injuries.csv")]:
         p=Path(path)
         if p.exists():
@@ -250,10 +261,10 @@ with tabs[9]:
     st.write("Ratings rows:",len(ratings)," | Projection rows:",len(games))
     st.dataframe(pd.DataFrame([
         {"Feed":"Power ratings","Status":"Static CSV snapshot"},
-        {"Feed":"Schedule / results","Status":"Static projections only"},
-        {"Feed":"Injuries / rotations","Status":"Not connected"},
+        {"Feed":"Schedule / results","Status":"Automated ESPN snapshots; see timestamps above"},
+        {"Feed":"Injuries / rotations","Status":"ESPN injury snapshot; rotations not modeled"},
         {"Feed":"Sportsbook / Pinnacle odds","Status":"Manual entry only"},
         {"Feed":"Prediction archive / CLV","Status":"Not connected"},
         {"Feed":"Monte Carlo","Status":"Available, uncalibrated"},
         {"Feed":"Bet tracking","Status":"CSV download / upload only"}]),hide_index=True,use_container_width=True)
-    st.warning("No automatic daily update or persistent database yet. Do not mistake stale projections for today's slate.")
+    st.warning("Scheduled refreshes depend on GitHub Actions and ESPN availability. Snapshots may be stale; no persistent betting database is connected.")

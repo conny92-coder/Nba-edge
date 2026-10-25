@@ -1,24 +1,18 @@
 """Daily NBA scoreboard ingest and conservative rating update. Public ESPN scoreboard API."""
-import csv, json, os, urllib.request
+import csv, json
+try:
+    from .feed_utils import fetch_json, write_rows, atomic_text
+except ImportError:
+    from feed_utils import fetch_json, write_rows, atomic_text
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"data"
-DATA.mkdir(exist_ok=True)
-HEADERS={"User-Agent":"NBAEdgeResearch/1.0 (public scoreboard data)"}
 TEAMS={"ATL","BOS","BKN","CHA","CHI","CLE","DAL","DEN","DET","GSW","HOU","IND","LAC","LAL","MEM","MIA","MIL","MIN","NOP","NYK","OKC","ORL","PHI","PHX","POR","SAC","SAS","TOR","UTA","WAS"}
-def fetch_json(url):
-    req=urllib.request.Request(url,headers=HEADERS)
-    with urllib.request.urlopen(req,timeout=25) as response:
-        return json.load(response)
 def read_rows(path):
     if not path.exists(): return []
     with path.open(newline="",encoding="utf-8") as f: return list(csv.DictReader(f))
-def write_rows(path,fields,rows):
-    with path.open("w",newline="",encoding="utf-8") as f:
-        w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore")
-        w.writeheader();w.writerows(rows)
 def collect(date):
     data=fetch_json("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates="+date)
     rows=[]
@@ -32,6 +26,8 @@ def collect(date):
         if not status.get("completed"): continue
         ha=home.get("team",{}).get("abbreviation","").upper()
         aa=away.get("team",{}).get("abbreviation","").upper()
+        aliases={'GS':'GSW','NY':'NYK','NO':'NOP','SA':'SAS','UTAH':'UTA','WSH':'WAS','PHO':'PHX'}
+        ha,aa=aliases.get(ha,ha),aliases.get(aa,aa)
         if ha not in TEAMS or aa not in TEAMS: continue
         try: hp=int(home["score"]);ap=int(away["score"])
         except (ValueError,KeyError,TypeError):continue
@@ -73,6 +69,7 @@ def main():
     write_rows(DATA/"updated_ratings.csv",["Code","Team","Baseline Net","Result Adjustment","Updated Net","Recorded Games"],out)
     status={"last_attempt_utc":now.isoformat(),"completed_games":len(results),"source":"ESPN scoreboard","errors":errors,
             "ratings_method":"Provisional score-margin residual; baseline + replayed adjustments; NOT box-score efficiency"}
-    (DATA/"refresh_status.json").write_text(json.dumps(status,indent=2)+"\n",encoding="utf-8")
-    if errors:raise RuntimeError("; ".join(errors))
+    atomic_text(DATA/"refresh_status.json",json.dumps(status,indent=2)+"\n")
+    if errors: print("Results feed unavailable; retained existing games: " + "; ".join(errors))
+    return not errors
 if __name__=="__main__":main()
