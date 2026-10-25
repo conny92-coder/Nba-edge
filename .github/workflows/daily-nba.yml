@@ -4,6 +4,12 @@ on:
     - cron: '20 12 * * *'
     - cron: '20 18 * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_projections.py'
+      - 'scripts/daily_update.py'
+      - 'data/power_ratings.csv'
+      - '.github/workflows/daily-nba.yml'
 permissions:
   contents: write
 jobs:
