@@ -11,7 +11,13 @@ def load_data():
     from pathlib import Path
     base=pd.read_csv("data/power_ratings.csv")
     schedule_path=Path("data/live_projections.csv")
-    games=pd.read_csv(schedule_path) if schedule_path.exists() else pd.DataFrame(columns=["UTC tipoff","Away","Home","Away projected","Home projected"])
+    fallback_path=Path("data/projections.csv")
+    if schedule_path.exists():
+        games=pd.read_csv(schedule_path)
+    elif fallback_path.exists():
+        games=pd.read_csv(fallback_path)
+    else:
+        games=pd.DataFrame(columns=["UTC tipoff","Away","Home","Away projected","Home projected"])
     if "UTC tipoff" not in games.columns:
         games["UTC tipoff"]=pd.NaT
     updated_path=Path("data/updated_ratings.csv")
@@ -53,7 +59,9 @@ tabs = st.tabs(["🏀 Today’s Matchups", "⭐ Best Bets", "Power Rankings", "M
 with tabs[0]:
     st.subheader("Today’s NBA Matchups")
     today = today_games()
-    st.caption(f"Date (UTC): {datetime.now(timezone.utc).date()} • Automated schedule/projections; verify freshness in Data Health")
+    st.caption(f"Date (UTC): {datetime.now(timezone.utc).date()} • Verify freshness in Data Health")
+    if not __import__("pathlib").Path("data/live_projections.csv").exists():
+        st.warning("Daily live projections have not been generated. Historical imported examples are available under Matchups, but are NOT today’s verified slate.")
     if today.empty:
         st.info("No current-day games in the last refreshed schedule. Check the workflow status.")
     for _, g in today.iterrows():
@@ -118,7 +126,7 @@ with tabs[2]:
     st.download_button("Export ratings",ratings.to_csv(index=False),"nba_ratings.csv","text/csv")
 with tabs[3]:
     st.subheader("Game projections")
-    st.warning("Imported spreadsheet snapshot, not a verified live NBA schedule.")
+    st.warning("Projections may be an imported snapshot when the automated schedule has not refreshed. Verify dates and sources before use.")
     st.dataframe(games,use_container_width=True,hide_index=True)
     st.download_button("Export projections",games.to_csv(index=False),"nba_projections.csv","text/csv")
 with tabs[4]:
