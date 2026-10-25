@@ -17,6 +17,8 @@ jobs:
           python-version: '3.11'
       - name: Refresh completed games and ratings
         run: python scripts/daily_update.py
+      - name: Build matchup projections
+        run: python scripts/build_projections.py
       - name: Refresh injuries (do not erase last snapshot on failure)
         continue-on-error: true
         run: python scripts/injury_check.py
