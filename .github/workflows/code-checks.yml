@@ -1,7 +1,7 @@
 name: NBA Edge code checks
 on:
   push:
-    branches: [main]
+    branches: [main, develop/nba-edge-v2]
   pull_request:
 jobs:
   syntax:
@@ -13,6 +13,8 @@ jobs:
           python-version: '3.11'
       - name: Compile all Python files
         run: python -m compileall -q app.py scripts
+      - name: Run deterministic data contract tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate ratings completeness
         run: |
           python - <<'PY'
