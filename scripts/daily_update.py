@@ -74,5 +74,5 @@ def main():
     status={"last_attempt_utc":now.isoformat(),"completed_games":len(results),"source":"ESPN scoreboard","errors":errors,
             "ratings_method":"Provisional score-margin residual; baseline + replayed adjustments; NOT box-score efficiency"}
     (DATA/"refresh_status.json").write_text(json.dumps(status,indent=2)+"\n",encoding="utf-8")
-    if errors:raise RuntimeError("; ".join(errors))
+    if errors: print("Partial scoreboard failures:", "; ".join(errors))
 if __name__=="__main__":main()
