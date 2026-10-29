@@ -5,6 +5,7 @@ on:
     - cron: '20 18 * * *'
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - 'scripts/build_projections.py'
       - 'scripts/daily_update.py'
@@ -33,6 +34,7 @@ jobs:
         continue-on-error: true
         run: python scripts/injury_check.py
       - name: Commit data changes
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "nba-edge-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
