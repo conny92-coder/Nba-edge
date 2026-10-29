@@ -29,6 +29,8 @@ def load_data():
 ratings, games = load_data()
 
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+NBA_TZ = ZoneInfo("America/New_York")
 from math import erf, sqrt
 
 # NBA team logo assets served from ESPN's public CDN.
@@ -38,8 +40,8 @@ def logo(team):
     return f"https://a.espncdn.com/i/teamlogos/nba/500/{code.lower()}.png" if code in TEAM_IDS else None
 
 def today_games():
-    dates = pd.to_datetime(games["UTC tipoff"], errors="coerce", utc=True).dt.date if "UTC tipoff" in games else pd.Series([],dtype="object")
-    return games.loc[dates == datetime.now(timezone.utc).date()].copy() if len(dates) else games.iloc[0:0].copy()
+    dates = pd.to_datetime(games["UTC tipoff"], errors="coerce", utc=True).dt.tz_convert(NBA_TZ).dt.date if "UTC tipoff" in games else pd.Series([],dtype="object")
+    return games.loc[dates == datetime.now(NBA_TZ).date()].copy() if len(dates) else games.iloc[0:0].copy()
 
 
 
@@ -59,7 +61,7 @@ tabs = st.tabs(["🏀 Today’s Matchups", "⭐ Best Bets", "Power Rankings", "M
 with tabs[0]:
     st.subheader("Today’s NBA Matchups")
     today = today_games()
-    st.caption(f"Date (UTC): {datetime.now(timezone.utc).date()} • Verify freshness in Data Health")
+    st.caption(f"NBA date (Eastern): {datetime.now(NBA_TZ).date()} • Verify freshness in Data Health")
     if not __import__("pathlib").Path("data/live_projections.csv").exists():
         st.warning("Daily live projections have not been generated. Historical imported examples are available under Matchups, but are NOT today’s verified slate.")
     if today.empty:
