@@ -22,8 +22,12 @@ jobs:
         with:
           python-version: '3.11'
       - name: Refresh completed games and ratings
+        id: results
+        continue-on-error: true
         run: python scripts/daily_update.py
       - name: Build matchup projections
+        id: projections
+        continue-on-error: true
         run: python scripts/build_projections.py
       - name: Refresh injuries (do not erase last snapshot on failure)
         continue-on-error: true
@@ -36,4 +40,13 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Automated NBA data refresh"
             git push
+          fi
+
+      - name: Report pipeline component failures
+        if: always()
+        run: |
+          echo "Results: ${{ steps.results.outcome }}"
+          echo "Projections: ${{ steps.projections.outcome }}"
+          if [[ "${{ steps.results.outcome }}" != "success" || "${{ steps.projections.outcome }}" != "success" ]]; then
+            exit 1
           fi
