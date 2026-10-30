@@ -1,10 +1,10 @@
 Code,Team,Baseline Net,Result Adjustment,Updated Net,Recorded Games
-ATL,Atlanta Hawks,5.55,-0.604,4.946,4
+ATL,Atlanta Hawks,5.55,-0.723,4.827,5
 BOS,Boston Celtics,5.10,0.329,5.429,2
 BKN,Brooklyn Nets,-6.96,-0.174,-7.134,3
 CHA,Charlotte Hornets,-2.17,-0.601,-2.771,3
 CHI,Chicago Bulls,-6.50,-0.842,-7.342,2
-CLE,Cleveland Cavaliers,1.66,-0.102,1.558,3
+CLE,Cleveland Cavaliers,1.66,0.017,1.677,4
 DAL,Dallas Mavericks,-4.05,2.446,-1.604,3
 DEN,Denver Nuggets,2.73,-0.116,2.614,1
 DET,Detroit Pistons,8.37,0.74,9.11,3
@@ -13,7 +13,7 @@ HOU,Houston Rockets,6.67,1.637,8.307,3
 IND,Indiana Pacers,-7.15,0.191,-6.959,4
 LAC,LA Clippers,-0.16,-0.754,-0.914,3
 LAL,Los Angeles Lakers,1.45,0.701,2.151,3
-MEM,Memphis Grizzlies,-3.76,0.383,-3.377,1
+MEM,Memphis Grizzlies,-3.76,1.633,-2.127,2
 MIA,Miami Heat,0.59,-0.298,0.292,4
 MIL,Milwaukee Bucks,-10.69,-0.247,-10.937,4
 MIN,Minnesota Timberwolves,7.39,1.257,8.647,3
@@ -23,7 +23,7 @@ OKC,Oklahoma City Thunder,10.41,-1.54,8.87,4
 ORL,Orlando Magic,-1.57,-1.825,-3.395,2
 PHI,Philadelphia 76ers,4.19,-0.831,3.359,4
 PHX,Phoenix Suns,-0.99,0.111,-0.879,1
-POR,Portland Trail Blazers,3.85,0.194,4.044,2
+POR,Portland Trail Blazers,3.85,-1.056,2.794,3
 SAC,Sacramento Kings,-9.25,-0.228,-9.478,2
 SAS,San Antonio Spurs,6.10,0.0,6.1,0
 TOR,Toronto Raptors,5.11,0.175,5.285,2

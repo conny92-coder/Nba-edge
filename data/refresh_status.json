@@ -1,7 +1,9 @@
 {
-  "last_attempt_utc": "2026-10-29T22:51:14.109082+00:00",
-  "completed_games": 33,
+  "last_attempt_utc": "2026-10-30T18:05:12.050822+00:00",
+  "completed_games": 35,
   "source": "ESPN scoreboard",
-  "errors": [],
+  "errors": [
+    "20261027: Expecting value: line 1 column 1 (char 0)"
+  ],
   "ratings_method": "Provisional score-margin residual; baseline + replayed adjustments; NOT box-score efficiency"
 }
