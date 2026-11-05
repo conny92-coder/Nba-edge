@@ -1,31 +1,31 @@
 Code,Team,Baseline Net,Result Adjustment,Updated Net,Recorded Games
 ATL,Atlanta Hawks,5.55,-1.064,4.486,6
-BOS,Boston Celtics,5.10,-0.004,5.096,5
-BKN,Brooklyn Nets,-6.96,0.224,-6.736,5
-CHA,Charlotte Hornets,-2.17,-1.794,-3.964,5
+BOS,Boston Celtics,5.10,-0.564,4.536,6
+BKN,Brooklyn Nets,-6.96,0.763,-6.197,6
+CHA,Charlotte Hornets,-2.17,-2.332,-4.502,6
 CHI,Chicago Bulls,-6.50,-1.118,-7.618,4
-CLE,Cleveland Cavaliers,1.66,0.66,2.32,6
+CLE,Cleveland Cavaliers,1.66,0.641,2.301,7
 DAL,Dallas Mavericks,-4.05,1.841,-2.209,5
-DEN,Denver Nuggets,2.73,-0.345,2.385,3
-DET,Detroit Pistons,8.37,1.977,10.347,5
+DEN,Denver Nuggets,2.73,0.598,3.328,4
+DET,Detroit Pistons,8.37,1.246,9.616,6
 GSW,Golden State Warriors,-3.54,0.0,-3.54,0
-HOU,Houston Rockets,6.67,2.551,9.221,6
-IND,Indiana Pacers,-7.15,-0.492,-7.642,7
-LAC,LA Clippers,-0.16,-1.64,-1.8,5
-LAL,Los Angeles Lakers,1.45,1.881,3.331,5
-MEM,Memphis Grizzlies,-3.76,2.716,-1.044,3
-MIA,Miami Heat,0.59,-0.629,-0.039,6
-MIL,Milwaukee Bucks,-10.69,-0.415,-11.105,6
-MIN,Minnesota Timberwolves,7.39,1.427,8.817,5
+HOU,Houston Rockets,6.67,1.93,8.6,7
+IND,Indiana Pacers,-7.15,0.137,-7.013,8
+LAC,LA Clippers,-0.16,-1.702,-1.862,6
+LAL,Los Angeles Lakers,1.45,1.999,3.449,6
+MEM,Memphis Grizzlies,-3.76,2.086,-1.674,4
+MIA,Miami Heat,0.59,-0.567,0.023,7
+MIL,Milwaukee Bucks,-10.69,0.145,-10.545,7
+MIN,Minnesota Timberwolves,7.39,2.047,9.437,6
 NOP,New Orleans Pelicans,-4.16,0.0,-4.16,0
 NYK,New York Knicks,4.21,0.0,4.21,0
-OKC,Oklahoma City Thunder,10.41,-2.474,7.936,6
+OKC,Oklahoma City Thunder,10.41,-2.455,7.955,7
 ORL,Orlando Magic,-1.57,-1.196,-2.766,4
-PHI,Philadelphia 76ers,4.19,-0.473,3.717,6
-PHX,Phoenix Suns,-0.99,-0.164,-1.154,2
-POR,Portland Trail Blazers,3.85,-0.551,3.299,4
-SAC,Sacramento Kings,-9.25,-0.061,-9.311,4
+PHI,Philadelphia 76ers,4.19,0.258,4.448,7
+PHX,Phoenix Suns,-0.99,-0.692,-1.682,3
+POR,Portland Trail Blazers,3.85,-0.024,3.826,5
+SAC,Sacramento Kings,-9.25,-0.179,-9.429,5
 SAS,San Antonio Spurs,6.10,0.0,6.1,0
-TOR,Toronto Raptors,5.11,-0.858,4.252,5
+TOR,Toronto Raptors,5.11,-1.801,3.309,6
 UTA,Utah Jazz,-8.67,0.0,-8.67,0
 WAS,Washington Wizards,-7.13,0.0,-7.13,0
