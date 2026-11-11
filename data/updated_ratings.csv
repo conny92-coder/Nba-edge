@@ -1,6 +1,6 @@
 Code,Team,Baseline Net,Result Adjustment,Updated Net,Recorded Games
 ATL,Atlanta Hawks,5.55,-2.132,3.418,8
-BOS,Boston Celtics,5.10,0.964,6.064,8
+BOS,Boston Celtics,5.10,2.016,7.116,9
 BKN,Brooklyn Nets,-6.96,-0.003,-6.963,8
 CHA,Charlotte Hornets,-2.17,-2.619,-4.789,8
 CHI,Chicago Bulls,-6.50,-0.975,-7.475,5
@@ -11,7 +11,7 @@ DET,Detroit Pistons,8.37,0.598,8.968,7
 GSW,Golden State Warriors,-3.54,0.0,-3.54,0
 HOU,Houston Rockets,6.67,1.564,8.234,9
 IND,Indiana Pacers,-7.15,0.216,-6.934,10
-LAC,LA Clippers,-0.16,-1.702,-1.862,6
+LAC,LA Clippers,-0.16,-2.691,-2.851,7
 LAL,Los Angeles Lakers,1.45,3.45,4.9,9
 MEM,Memphis Grizzlies,-3.76,2.13,-1.63,6
 MIA,Miami Heat,0.59,-0.639,-0.049,8
@@ -19,12 +19,12 @@ MIL,Milwaukee Bucks,-10.69,-0.24,-10.93,9
 MIN,Minnesota Timberwolves,7.39,2.047,9.437,6
 NOP,New Orleans Pelicans,-4.16,0.0,-4.16,0
 NYK,New York Knicks,4.21,0.0,4.21,0
-OKC,Oklahoma City Thunder,10.41,-1.286,9.124,8
-ORL,Orlando Magic,-1.57,-1.692,-3.262,5
-PHI,Philadelphia 76ers,4.19,-1.092,3.098,9
-PHX,Phoenix Suns,-0.99,0.343,-0.647,5
-POR,Portland Trail Blazers,3.85,-0.243,3.607,6
-SAC,Sacramento Kings,-9.25,-0.106,-9.356,6
+OKC,Oklahoma City Thunder,10.41,-2.462,7.948,9
+ORL,Orlando Magic,-1.57,-1.547,-3.117,6
+PHI,Philadelphia 76ers,4.19,-2.144,2.046,10
+PHX,Phoenix Suns,-0.99,1.333,0.343,6
+POR,Portland Trail Blazers,3.85,0.933,4.783,7
+SAC,Sacramento Kings,-9.25,-0.251,-9.501,7
 SAS,San Antonio Spurs,6.10,0.0,6.1,0
 TOR,Toronto Raptors,5.11,-2.907,2.203,8
 UTA,Utah Jazz,-8.67,0.0,-8.67,0
