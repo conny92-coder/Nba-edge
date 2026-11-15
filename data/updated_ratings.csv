@@ -1,22 +1,22 @@
 Code,Team,Baseline Net,Result Adjustment,Updated Net,Recorded Games
 ATL,Atlanta Hawks,5.55,-2.977,2.573,9
 BOS,Boston Celtics,5.10,2.12,7.22,10
-BKN,Brooklyn Nets,-6.96,-0.003,-6.963,8
+BKN,Brooklyn Nets,-6.96,-0.591,-7.551,9
 CHA,Charlotte Hornets,-2.17,-2.513,-4.683,9
-CHI,Chicago Bulls,-6.50,-0.13,-6.63,6
-CLE,Cleveland Cavaliers,1.66,0.255,1.915,10
-DAL,Dallas Mavericks,-4.05,1.579,-2.471,8
+CHI,Chicago Bulls,-6.50,1.12,-5.38,7
+CLE,Cleveland Cavaliers,1.66,0.436,2.096,11
+DAL,Dallas Mavericks,-4.05,1.399,-2.651,9
 DEN,Denver Nuggets,2.73,0.71,3.44,7
-DET,Detroit Pistons,8.37,0.598,8.968,7
+DET,Detroit Pistons,8.37,-0.652,7.718,8
 GSW,Golden State Warriors,-3.54,0.0,-3.54,0
 HOU,Houston Rockets,6.67,1.564,8.234,9
 IND,Indiana Pacers,-7.15,0.216,-6.934,10
 LAC,LA Clippers,-0.16,-2.229,-2.389,8
 LAL,Los Angeles Lakers,1.45,3.308,4.758,10
-MEM,Memphis Grizzlies,-3.76,2.029,-1.731,7
-MIA,Miami Heat,0.59,-0.01,0.58,9
+MEM,Memphis Grizzlies,-3.76,2.617,-1.143,8
+MIA,Miami Heat,0.59,1.24,1.83,10
 MIL,Milwaukee Bucks,-10.69,-0.015,-10.705,11
-MIN,Minnesota Timberwolves,7.39,3.297,10.687,7
+MIN,Minnesota Timberwolves,7.39,2.047,9.437,8
 NOP,New Orleans Pelicans,-4.16,0.0,-4.16,0
 NYK,New York Knicks,4.21,0.0,4.21,0
 OKC,Oklahoma City Thunder,10.41,-3.482,6.928,11
